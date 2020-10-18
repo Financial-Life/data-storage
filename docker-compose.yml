@@ -3,10 +3,7 @@ version: '3.7'
 services:
   flyway:
     image: flyway/flyway:6.3.1
-    command: -configFiles=/flyway/conf/flyway.config -locations=filesystem:/flyway/sql -connectRetries=60 migrate
-    volumes:
-      - ${PWD}/sql_versions:/flyway/sql
-      - ${PWD}/docker-flyway.config:/flyway/conf/flyway.config
+    command: -url=jdbc:postgresql://postgres:5432/db-hackathon -schemas=financial -user=hackathon -password=secret -locations=filesystem:/common,/dev -connectRetries=60 migrate
     depends_on:
       - postgres
 
